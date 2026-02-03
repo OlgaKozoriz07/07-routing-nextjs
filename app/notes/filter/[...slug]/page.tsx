@@ -7,7 +7,7 @@ import { fetchNotes } from "@/lib/api";
 import NoteClient from "./Notes.client";
 
 interface NotesByCategoryProps {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
   searchParams: Promise<{
     page?: string;
     query?: string;
@@ -15,9 +15,8 @@ interface NotesByCategoryProps {
 }
 
 const NotesByCategory = async ({ params, searchParams }: NotesByCategoryProps) => {
-  const slug = params.slug ?? [];
-  const first = (slug[0] ?? "").toLowerCase();
-  const tag = first === "all" ? undefined : slug[0];
+  const { slug } = await params;
+  const tag = slug[0] === "all" ? undefined : slug[0];
 
   const { page, query } = await searchParams;
 
@@ -36,4 +35,4 @@ const NotesByCategory = async ({ params, searchParams }: NotesByCategoryProps) =
   );
 };
 
-export default NotesByCategory;
+export default NotesByCategory;   

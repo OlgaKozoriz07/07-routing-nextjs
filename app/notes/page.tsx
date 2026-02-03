@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  redirect("/notes/filter/All");
+  redirect("/notes/filter/all");
 }
