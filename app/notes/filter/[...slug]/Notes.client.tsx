@@ -20,9 +20,7 @@ export default function NoteClient({ tag }: NoteDetailsClientProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [currentQuery, setCurrentQuery] = useState<string | undefined>(
-    undefined,
-  );
+  const [currentQuery, setCurrentQuery] = useState("");
 
   const { data, isSuccess, isPending } = useQuery({
     queryKey: ["notes", currentPage, currentQuery, tag],

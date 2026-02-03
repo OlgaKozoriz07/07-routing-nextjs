@@ -7,19 +7,17 @@ import { fetchNotes } from "@/lib/api";
 import NoteClient from "./Notes.client";
 
 interface NotesByCategoryProps {
-  params: Promise<{ slug: string[] }>;
+  params: { slug: string[] };
   searchParams: Promise<{
     page?: string;
     query?: string;
   }>;
 }
 
-const NotesByCategory = async ({
-  params,
-  searchParams,
-}: NotesByCategoryProps) => {
-  const { slug } = await params;
-  const tag = slug[0] === "All" ? undefined : slug[0];
+const NotesByCategory = async ({ params, searchParams }: NotesByCategoryProps) => {
+  const slug = params.slug ?? [];
+  const first = (slug[0] ?? "").toLowerCase();
+  const tag = first === "all" ? undefined : slug[0];
 
   const { page, query } = await searchParams;
 
