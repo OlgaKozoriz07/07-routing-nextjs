@@ -36,7 +36,7 @@ export const fetchNotes = async(
 
 
 export const fetchNoteById = async (noteId: string) => {
-  const response = await axios.get(`/notes/${noteId}`, {
+  const response = await axios.get<Note>(`/notes/${noteId}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
     },
